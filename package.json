@@ -13,13 +13,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "azure-openai": "^0.9.4",
     "body-parser": "^1.20.2",
     "express": "^4.18.2",
-    "azure-openai": "^0.9.4",
     "openai": "^3.1.0"
   },
   "bugs": {
     "url": "https://github.com/ryanradder11/chatGptNode/issues"
   },
-  "homepage": "https://github.com/ryanradder11/chatGptNode#readme"
+  "homepage": "https://github.com/ryanradder11/chatGptNode#readme",
+  "devDependencies": {
+    "@types/node": "^18.15.11"
+  }
 }
