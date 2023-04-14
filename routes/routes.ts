@@ -16,7 +16,38 @@ let chatMessages  = [[]]
 function errorHandler(error, res) {
   if (error.response) {
     console.error(error.response.status, error.response.data);
-    res.status(error.response.status).json(error.response.data);
+    switch (error.response.status) {
+      case 400:
+        // Bad request - The request was unacceptable, often due to missing a required parameter.
+        res.status(400).json(error.response.data);
+        break;
+      case 401:
+        // Unauthorized - No valid API key provided.
+        res.status(401).json(error.response.data);
+        break;
+      case 403:
+        // Forbidden - The API key doesn't have permissions to perform the request.
+        res.status(403).json(error.response.data);
+        break;
+      case 404:
+        // Not found - The requested resource doesn't exist.
+        res.status(404).json(error.response.data);
+        break;
+      case 500:
+        // Internal Server Error - We had a problem with our server. Try again later.
+        res.status(500).json(error.response.data);
+        break;
+      case 502:
+        // Bad Gateway - We got an invalid response from the server upstream.
+        res.status(502).json(error.response.data);
+        break;
+      default:
+        res.status(500).json({
+          error: {
+            message: 'An error occurred during your request.',
+          }
+        });
+    }
   } else {
     console.error(`Error with OpenAI API request: ${error.message}`);
     res.status(500).json({
